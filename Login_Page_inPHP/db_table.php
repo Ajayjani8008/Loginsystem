@@ -1,21 +1,25 @@
- <?php
-    // creating data base 
-    $database = "CREATE database users";
-    if (mysqli_query($conn, $database)) {
-        echo "data base created successfully";
-    } else {
-        echo " there is error in create database ";
-        mysqli_error($conn);
-    }
-    // creating  and table
-    $table = "CREATE TABLE user_data (
- srno. INT(3) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
- username VARCHAR(30) NOT NULL,
- userpass VARCHAR(30) NOT NULL)";
-    if (mysqli_query($conn, $table)) {
-        echo "table create succesfully";
-    } else {
-        echo "there is erroe in table creation";
-        mysqli_error($conn);
-    }
-    ?>
+<?php
+require '_dbcon.php';
+
+// Create the database
+$database = "CREATE DATABASE IF NOT EXISTS users";
+if (mysqli_query($conn, $database)) {
+    echo "Database created successfully";
+} else {
+    echo "There is an error in creating the database: " . mysqli_error($conn);
+}
+
+// Create the user_data table
+$table = "CREATE TABLE IF NOT EXISTS user_data (
+    srno INT(3) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    username VARCHAR(30) NOT NULL,
+    userpass VARCHAR(30) NOT NULL
+)";
+if (mysqli_query($conn, $table)) {
+    echo "Table created successfully";
+} else {
+    echo "There is an error in creating the table: " . mysqli_error($conn);
+}
+
+mysqli_close($conn);
+?>

@@ -1,8 +1,9 @@
 <?php
-// creating connection with database
-$conn=mysqli_connect('localhost','root','','users') or die (mysqli_error($connection));
-if(!$conn){
-    echo "there is  problem to create database";
-}else{
-     echo "connection create succesfully";
+// creating connection with the database
+$conn = mysqli_connect('localhost', 'root', '', 'users') or die(mysqli_error($conn));
+if (!$conn) {
+    echo "There is a problem connecting to the database.";
+} else {
+    echo "Connection created successfully";
 }
+?>
