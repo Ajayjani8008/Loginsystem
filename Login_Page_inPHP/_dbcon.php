@@ -8,7 +8,7 @@ if (!$conn) {
 // Create the database
 $database = "CREATE DATABASE IF NOT EXISTS users";
 if (mysqli_query($conn, $database)) {
-    echo "Database created successfully";
+    // echo "Database created successfully";
 } else {
     echo "There is an error in creating the database: " . mysqli_error($conn);
 }
@@ -20,7 +20,7 @@ $table = "CREATE TABLE IF NOT EXISTS user_data (
     userpass VARCHAR(30) NOT NULL
 )";
 if (mysqli_query($conn, $table)) {
-    echo "Table created successfully";
+    // echo "Table created successfully";
 } else {
     echo "There is an error in creating the table: " . mysqli_error($conn);
 }
