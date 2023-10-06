@@ -38,13 +38,19 @@
 
                 $sqlres = mysqli_query($conn, $sql);
                 $rowcount = mysqli_num_rows($sqlres);
-                
+
                 if ($rowcount != 0) {
                     echo "<p class='error'>Username is not available. Try another one.</p>";
                 } elseif ($getpassword != $conpassword) {
                     echo "<p class='error'>Passwords do not match.</p>";
                 } else {
-                    echo "<p class='success'>You have successfully signed up.</p>";
+                    // Insert user data into the database
+                    $insert_query = "INSERT INTO user_data (username, userpass) VALUES ('$getusername', '$getpassword')";
+                    if (mysqli_query($conn, $insert_query)) {
+                        echo "<p class='success'>You have successfully signed up.</p>";
+                    } else {
+                        echo "<p class='error'>Error: " . mysqli_error($conn) . "</p>";
+                    }
                 }
             }
             ?>
