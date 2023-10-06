@@ -11,7 +11,7 @@
     <div class="container">
         <div class="signup-box">
             <h1>Sign Up</h1>
-            <form method="post">
+            <form method="post" action="signup.php">
                 <label for="getname">Enter your name:</label>
                 <input type="text" name="getname" id="getname"><br><br>
                 <label for="getusername">Enter Username:</label>
@@ -22,37 +22,33 @@
                 <input type="password" name="conpassword" id="conpassword"><br><br>
                 <button type="submit" name="sub">Sign Up</button><br>
             </form>
+            <p class="message">
+                Already have an account? <a href="index.php">Log in</a>
+            </p>
+            <?php
+            require '_dbcon.php';
+
+            if (isset($_POST['sub'])) {
+                $getname = $_POST['getname'];
+                $getusername = $_POST['getusername'];
+                $getpassword = $_POST['getpassword'];
+                $conpassword = $_POST['conpassword'];
+
+                $sql = "SELECT username FROM user_data WHERE username='" . $getusername . "'";
+
+                $sqlres = mysqli_query($conn, $sql);
+                $rowcount = mysqli_num_rows($sqlres);
+                
+                if ($rowcount != 0) {
+                    echo "<p class='error'>Username is not available. Try another one.</p>";
+                } elseif ($getpassword != $conpassword) {
+                    echo "<p class='error'>Passwords do not match.</p>";
+                } else {
+                    echo "<p class='success'>You have successfully signed up.</p>";
+                }
+            }
+            ?>
         </div>
     </div>
-    <?php
-    require '_dbcon.php';
-
-    if (isset($_POST['sub'])) {
-        $getname = $_POST['getname'];
-        $getusername = $_POST['getusername'];
-        $getpassword = $_POST['getpassword'];
-        $conpassword = $_POST['conpassword'];
-
-        $sql = "SELECT username FROM user_data WHERE username='" . $getusername . "'";
-
-        $sqlres = mysqli_query($conn, $sql);
-        $rowcount = mysqli_num_rows($sqlres);
-        
-        if ($rowcount != 0) {
-            echo "<p class='error'>Username is not available. Try another one.</p>";
-        } elseif ($getpassword != $conpassword) {
-            echo "<p class='error'>Passwords do not match.</p>";
-        } else {
-            echo "<p class='success'>You have successfully signed up.</p>";
-            $gotologin = "<a href='index.php'>Log in</a>";
-            echo $gotologin;
- 
-            // Data inserting into the database
-            $sql = "INSERT INTO user_data(username, userpass) VALUES('" . $getusername . "','" . $getpassword . "')";
-
-            $sqlres = mysqli_query($conn, $sql);
-        }
-    }
-    ?>
 </body>
 </html>

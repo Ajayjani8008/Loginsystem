@@ -11,13 +11,16 @@
     <div class="container">
         <div class="login-box">
             <h1>Login</h1>
-            <form method="post">
+            <form method="post" action="index.php">
                 <label for="getusername">Enter Username:</label>
                 <input type="text" name="getusername" id="getusername"><br><br>
                 <label for="getpassword">Enter Password:</label>
                 <input type="password" name="getpassword" id="getpassword"><br><br>
                 <button type="submit" name="sub">Log in</button><br>
             </form>
+            <p class="message">
+                Don't have an account? <a href="signup.php">Sign Up</a>
+            </p>
             <?php
             require '_dbcon.php';
 
@@ -27,7 +30,7 @@
                 $sql1 = "SELECT * FROM user_data WHERE username='$getusername' AND userpass='$getpassword'";
                 $sqlres = mysqli_query($conn, $sql1);
                 $countrows = mysqli_num_rows($sqlres);
-                
+
                 if ($countrows == 0) {
                     echo "<p class='error'>Account is not available. Please <a href='signup.php'>Sign Up.</a></p>";
                 } else {

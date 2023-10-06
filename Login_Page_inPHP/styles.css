@@ -11,7 +11,8 @@ body {
 }
 
 .login-box,
-.signup-box {
+.signup-box,
+.dashboard-box {
     background-color: #fff;
     padding: 20px;
     border-radius: 5px;
@@ -54,4 +55,12 @@ button:hover {
 
 .success {
     color: green;
+}
+
+.message {
+    text-align: center;
+}
+
+.message a {
+    color: #007bff;
 }
