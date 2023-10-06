@@ -5,20 +5,21 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sign Up Page</title>
+    <link rel="stylesheet" type="text/css" href="styles.css">
 </head>
 <body>
-    <div style="display:flex; align-items:center; justify-content:center; height:100vh">
-        <div>
-            <h1>Sign Up.</h1>
+    <div class="container">
+        <div class="signup-box">
+            <h1>Sign Up</h1>
             <form method="post">
-                <label for="">Enter your name :</label>
-                <input type="text" name="getname"><br><br>
-                <label for="">Enter Username :</label>
-                <input type="text" name="getusername"><br><br>
-                <label for="">Enter Password :</label>
-                <input type="Password" name="getpassword"><br><br>
-                <label for="">Confirm Password :</label>
-                <input type="Password" name="conpassword"><br><br>
+                <label for="getname">Enter your name:</label>
+                <input type="text" name="getname" id="getname"><br><br>
+                <label for="getusername">Enter Username:</label>
+                <input type="text" name="getusername" id="getusername"><br><br>
+                <label for="getpassword">Enter Password:</label>
+                <input type="password" name="getpassword" id="getpassword"><br><br>
+                <label for="conpassword">Confirm Password:</label>
+                <input type="password" name="conpassword" id="conpassword"><br><br>
                 <button type="submit" name="sub">Sign Up</button><br>
             </form>
         </div>
@@ -38,13 +39,13 @@
         $rowcount = mysqli_num_rows($sqlres);
         
         if ($rowcount != 0) {
-            echo "Username is not available. Try another one.";
+            echo "<p class='error'>Username is not available. Try another one.</p>";
         } elseif ($getpassword != $conpassword) {
-            echo "Passwords do not match.";
+            echo "<p class='error'>Passwords do not match.</p>";
         } else {
-            echo "You have successfully signed up.<br>";
-            $gotologin = "<a href='index.php'>Log in.</a> <br>";
-            echo $gotologin . "<br>";
+            echo "<p class='success'>You have successfully signed up.</p>";
+            $gotologin = "<a href='index.php'>Log in</a>";
+            echo $gotologin;
  
             // Data inserting into the database
             $sql = "INSERT INTO user_data(username, userpass) VALUES('" . $getusername . "','" . $getpassword . "')";
